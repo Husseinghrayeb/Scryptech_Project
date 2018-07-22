@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+button.btn-submit:focus, button.btn-submit:hover {
+  background-color: #38547b;
+}
+
+div.sm-jumbotron {
+  border-style: groove;
+  text-align:left;
+  margin-top:20px;
+}
+
+button.btn-transport {
+  background-color: white;
+  width: 400px;
+  height: 80px;
+  border-style: groove;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+button.btn-transport:hover{
+  background-color: #e7e7e7;
+}
+button.btn-transport1 {
+  background-color: white;
+  width: 100px;
+  height: 30px;
+  border-style: groove;
+  margin-left:10px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+button.btn-transport1:hover {
+  background-color: #e7e7e7;
+}
+input.ng-invalid.ng-dirty {
+  border-bottom-color: #e91e63;
+  box-shadow: 0 1px 0 0 #e91e63;
+}
+
+p.validation-error{
+  color: red;
+  text-align: center;
+}
+div.alert{
+  color: red;
+  text-align: center;
+}

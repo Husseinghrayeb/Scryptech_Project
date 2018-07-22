@@ -1,0 +1,53 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="row">
+  <div class="col s7 offset-s2">
+    <div class="card">
+      <div class="sm-jumbotron center-align">
+        <h4>
+          Employee Benefits Application-List Employees
+        </h4>
+      </div>
+      <div class="sm-jumbotron center-align">
+        <div class="row">
+          <div class="col s8 offset-s1">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date Of Birthday</th>
+                  <th>Salary</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let employee of employeeService.employeeList">
+                  <td>{{employee.Name}}</td>
+                  <td>{{employee.DOB}}</td>
+                  <td>{{employee.Salary}}</td>
+                  <td>
+                    <a class="btn" (click)="showForEdit(employee)">
+                      <i class="material-icons">edit</i>Edit</a>
+                  </td>
+                  <td>
+                    <a class="btn text-danger" (click)="onDelete(employee.EmployeeId)">
+                      <i class="material-icons">delete</i>Delete</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s11 right-align">
+            <button type="button" class=" btn-transport1" (click)="homeClick()">
+              <i class="material-icons left">home</i>Home</button>
+            <button type="button" class=" btn-transport1" (click)="addEmployeeClick()">
+              <i class="material-icons left">add</i>Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

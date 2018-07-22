@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col s7 offset-s2">
+    <div class="card">
+      <div class="sm-jumbotron center-align">
+        <h4>
+          Employee Benefits Application-{{title}}
+        </h4>
+      </div>
+      <form class="col s12 white" #employeeAddingForm="ngForm" (ngSubmit)="onSubmit(employeeAddingForm)">
+        <div class="sm-jumbotron center-align">
+          <div class="row">
+
+
+            <div class="row"></div>
+
+            <div class="input-field col s6 ">
+              <div class="row">
+                <div class="input-field col s11 left-align ">
+                  <input type="hidden" name="EmployeeId" #EmployeeId="ngModel" [(ngModel)]="employeeService.selectedEmployee.EmployeeId" />
+
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="input-field col s11 left-align ">
+                  <i class="material-icons prefix">account_circle</i>
+
+
+                  <input class="validate" type="text" name="Name" #Name="ngModel" [(ngModel)]="employeeService.selectedEmployee.Name" placeholder="Name"
+                    required>
+                  <p class="validation-error" *ngIf="Name.invalid && Name.touched">This Field Is Required</p>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s11 left-align">
+                  <i class="material-icons prefix">date_range</i>
+
+
+
+                  <input class="validate" type="text" name="DOB" #DOB="ngModel" [(ngModel)]="employeeService.selectedEmployee.DOB" placeholder="Date Of Birth"
+                    required>
+                  <p class="validation-error" *ngIf="DOB.invalid && DOB.touched">This Field Is Required</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s11 left-align">
+                  <i class="material-icons prefix">attach_money</i>
+
+                  <input class="validate" type="text" name="Salary" #Salary="ngModel" [(ngModel)]="employeeService.selectedEmployee.Salary"
+                    placeholder="Salary" required>
+                  <p class="validation-error" *ngIf="Salary.invalid && Salary.touched">This Field Is Required</p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="input-field col s6  ">
+              <fieldset>
+                <legend>Benefits</legend>
+
+                <p *ngFor="let benefits of parsedBenifits">
+                  <label>
+                    <input type="checkbox" name="{{benefits.BenefitId}}" class="filled-in" (change)="checkBenefit($event, benefits);" [checked]="benefits.isChecked"
+                    />
+
+                    <span> {{benefits.Name}}</span>
+                  </label>
+                </p>
+
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s11 right-align">
+            <button type="button" class=" btn-transport1" (click)="homeClick()">
+              <i class="material-icons left">home</i>Home</button>
+            <button [disabled]="!employeeAddingForm.valid" type="submit" class=" btn-transport1">
+              <i class="material-icons right">send</i>Save</button>
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
