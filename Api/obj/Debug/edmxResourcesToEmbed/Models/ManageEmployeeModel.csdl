@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ManagerEmployeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Benefit">
+    <Key>
+      <PropertyRef Name="BenefitId" />
+    </Key>
+    <Property Name="BenefitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmployeeBenefits" Relationship="Self.FK_EmployeeBenefits_Benefits" FromRole="Benefits" ToRole="EmployeeBenefits" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Salary" Type="Int32" />
+    <NavigationProperty Name="EmployeeBenefits" Relationship="Self.FK_EmployeeBenefits_Employee" FromRole="Employee" ToRole="EmployeeBenefits" />
+  </EntityType>
+  <EntityType Name="EmployeeBenefit">
+    <Key>
+      <PropertyRef Name="EmployeeBenefitId" />
+    </Key>
+    <Property Name="EmployeeBenefitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="BenefitId" Type="Int32" />
+    <NavigationProperty Name="Benefit" Relationship="Self.FK_EmployeeBenefits_Benefits" FromRole="EmployeeBenefits" ToRole="Benefits" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeBenefits_Employee" FromRole="EmployeeBenefits" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="SystemConfig">
+    <Key>
+      <PropertyRef Name="SystemConfigId" />
+    </Key>
+    <Property Name="SystemConfigId" Type="Int32" Nullable="false" />
+    <Property Name="ConfigData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_EmployeeBenefits_Benefits">
+    <End Role="Benefits" Type="Self.Benefit" Multiplicity="0..1" />
+    <End Role="EmployeeBenefits" Type="Self.EmployeeBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Benefits">
+        <PropertyRef Name="BenefitId" />
+      </Principal>
+      <Dependent Role="EmployeeBenefits">
+        <PropertyRef Name="BenefitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeBenefits_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="EmployeeBenefits" Type="Self.EmployeeBenefit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeBenefits">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ManagerEmployeeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Benefits" EntityType="Self.Benefit" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="EmployeeBenefits" EntityType="Self.EmployeeBenefit" />
+    <EntitySet Name="SystemConfigs" EntityType="Self.SystemConfig" />
+    <AssociationSet Name="FK_EmployeeBenefits_Benefits" Association="Self.FK_EmployeeBenefits_Benefits">
+      <End Role="Benefits" EntitySet="Benefits" />
+      <End Role="EmployeeBenefits" EntitySet="EmployeeBenefits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeBenefits_Employee" Association="Self.FK_EmployeeBenefits_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeBenefits" EntitySet="EmployeeBenefits" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
